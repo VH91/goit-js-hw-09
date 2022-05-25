@@ -18,11 +18,33 @@ img {
 }
 button[data-start],
 button[data-stop] {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: block;
   padding: 5px 20px;
-  background-color: rgb(194, 189, 189);
+  background-color: rgb(78, 46, 46);
   border: none;
   border-radius: 10px;
   box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.2);
-  color: rgb(14, 13, 13);
+  color: rgb(13, 228, 228);
   font-size: 24px;
+}
+
+.timer {
+  display: flex;
+  margin-top: 30px;
+}
+
+.field:not(last-child) {
+  margin-right: 30px;
+}
+
+.field .value {
+  color:aqua;
+  font-size: 40px;
+}
+
+.field .label {
+  color:rgb(95, 100, 100);
+  font-size: 20px;
 }
