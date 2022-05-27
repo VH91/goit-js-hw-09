@@ -13,20 +13,26 @@ function onSubmit(e) {
     const amount = inputAmount.valueAsNumber;
     let timerCount = 0;
     for (let i = 1; i <= amount; i += 1) {
-        createPromise(i, timerCount + firstDelay);
-        timerCount += step;
+        createPromise(i, timerCount + firstDelay)
+        .then(({ position, delay }) => {
+            Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+          })
+          .catch(({ position, delay }) => {
+            Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+          });
+          timerCount += step;
     }
 }
 
 function createPromise(position, delay) {
-    const promise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
             const shouldResolve = Math.random() > 0.3;
             if (shouldResolve) {
-                Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
-            } else {
-                Notiflix.Notify.failure(`Rejected promise ${position} in ${delay}ms`);
-            }
+                resolve({position, delay});
+              } else {
+                reject({position, delay});
+              };
         }, delay);
     });
 }
